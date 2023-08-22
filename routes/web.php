@@ -1,8 +1,8 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-use 
+use App\Http\Controllers\admin\DashboardController as AdminDashboardController;
+use App\Http\Controllers\guest\HomeController as GuestHomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,26 +15,13 @@ use
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
-
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
-
-require __DIR__.'/auth.php';
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
 Route:: prefix('admin')->name('admin.')->middleware('auth')->group(function () {
-    Route::get('/home', [ DashboardController::class , 'home'])->name('home');
+    Route::get('/home', [ AdminDashboardController::class , 'home'])->name('home');
+});
+
+Route:: prefix('guest')->name('admin.')->middleware('auth')->group(function () {
+    Route::get('/', [ GuestHomeController::class , 'home'])->name('home');
 });

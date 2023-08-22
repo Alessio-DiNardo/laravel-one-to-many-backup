@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class Post extends Controller
+class PostController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -36,7 +36,7 @@ class Post extends Controller
      */
     public function show(string $id)
     {
-        //
+        return view('admin.post.show', compact('post'));
     }
 
     /**

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use 
 
 /*
 |--------------------------------------------------------------------------
@@ -33,3 +34,7 @@ require __DIR__.'/auth.php';
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route:: prefix('admin')->name('admin.')->middleware('auth')->group(function () {
+    Route::get('/home', [ DashboardController::class , 'home'])->name('home');
+});

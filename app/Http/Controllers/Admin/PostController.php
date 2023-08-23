@@ -65,7 +65,7 @@ class PostController extends Controller
 
         return redirect()->route('admin.posts.show', compact('post'));
     }
-    }
+    
 
     /**
      * Remove the specified resource from storage.
@@ -73,8 +73,10 @@ class PostController extends Controller
 
 
     
-    public function destroy(string $id)
+        public function destroy(Post $post)
     {
-        //
+        $post->delete();
+        return redirect()->route('admin.posts.index');
     }
+
 }

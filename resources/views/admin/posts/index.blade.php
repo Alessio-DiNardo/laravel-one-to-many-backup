@@ -29,15 +29,20 @@
                                 {{ $post->slug }}
                             </td>
                             <td>
-                                <a href="" class="btn btn-sm btn-primary">
+                                <a href="{{ route('admin.posts.show', $post) }}" class="btn btn-sm btn-primary">
                                     View
                                 </a>
-                                <a href="" class="btn btn-sm btn-success">
+                                <a href="{{ route('admin.posts.edit', $post) }}" class="btn btn-sm btn-success">
                                     Edit
                                 </a>
-                                <a href="" class="btn btn-sm btn-warning">
-                                    Delete
-                                </a>
+                                <form class="d-inline-block" action="{{ route('admin.posts.destroy', $post) }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+
+                                    <button type="submit" class="btn btn-sm btn-warning">
+                                        Delete
+                                    </button>
+                                </form>
                             </td>
                         </tr>
                     @endforeach

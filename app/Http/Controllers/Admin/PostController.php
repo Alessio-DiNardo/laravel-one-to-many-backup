@@ -31,13 +31,33 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // dd($request->all());
+
+        $data = $request->validate([
+            'title' => ['required', 'unique:posts','min:3', 'max:255'],
+            'image' => ['image'],
+            'content' => ['required', 'min:10'],
+        ]);
+
+        if ($request->hasFile('image')){
+            $img_path = Storage::put('uploads/posts', $request['image']);
+            $data['image'] = $img_path;
+        }
+
+        $data["slug"] = Str::of($data['title'])->slug('-');
+        $newPost = Post::create($data);
+
+        $newPost->slug = Str::of("$newPost->id " . $data['title'])->slug('-');
+        $newPost->save();
+
+        return redirect()->route('admin.posts.show', $newPost);
     }
+
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Post $post)
     {
         return view('admin.post.show', compact('post'));
     }
@@ -60,7 +80,13 @@ class PostController extends Controller
             'image' => ['url:https'],
             'content' => ['required', 'min:10'],
         ]);
-        $data['slug'] = Str::of($data['title'])->slug('-');
+        if ($request->hasFile('image')){
+            Storage::delete($post->image);
+            $img_path = Storage::put('uploads/posts', $request['image']);
+            $data['image'] = $img_path;
+        }
+
+        $data['slug'] = Str::of("$post->id " . $data['title'])->slug('-');
 
         $post->update($data);
 

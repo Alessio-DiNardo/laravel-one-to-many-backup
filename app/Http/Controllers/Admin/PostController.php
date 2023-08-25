@@ -78,7 +78,7 @@ class PostController extends Controller
     {
         $data = $request->validate([
             'title' => ['required', 'min:3', 'max:255', Rule::unique('posts')->ignore($post->id)],
-            'image' => ['image'],
+            'image' => ['image', 'max:512'],
             'content' => ['required', 'min:10'],
         ]);
         if ($request->hasFile('image')){

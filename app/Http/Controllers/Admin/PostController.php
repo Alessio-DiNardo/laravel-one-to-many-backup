@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Admin\Post;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
@@ -77,7 +78,7 @@ class PostController extends Controller
     {
         $data = $request->validate([
             'title' => ['required', 'min:3', 'max:255', Rule::unique('posts')->ignore($post->id)],
-            'image' => ['url:https'],
+            'image' => ['image'],
             'content' => ['required', 'min:10'],
         ]);
         if ($request->hasFile('image')){

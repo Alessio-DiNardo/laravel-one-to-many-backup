@@ -18,6 +18,9 @@
                     <p class="card-text">
                         {{ $post->content }}
                     </p>
+                    <p class="card-text">
+                        <strong>{{$post->type ? $post->type->name : 'Undefined'}}</strong>
+                    </p>
                     <a href="" class="btn btn-sm btn-success">
                         Edit
                     </a>

@@ -22,10 +22,10 @@ class Post extends Model
         'slug'
     ];
 
-    public function type()
+    public function types()
     {
 
-    return $this->belongsTo(Type::class)
+    return $this->belongsTo(Type::class,'type_id');
 
     /**
     * Get the route key for the model.

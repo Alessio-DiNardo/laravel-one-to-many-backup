@@ -19,7 +19,7 @@
                         {{ $post->content }}
                     </p>
                     <p class="card-text">
-                        <strong>{{$post->type ? $post->type->name : 'Undefined'}}</strong>
+                        <strong>{{$post->type ? $post->type->name : ''}}</strong>
                     </p>
                     <a href="" class="btn btn-sm btn-success">
                         Edit

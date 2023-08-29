@@ -19,10 +19,11 @@ class Post extends Model
         'title',
         'content',
         'image',
-        'slug'
+        'slug',
+        'type_id'
     ];
 
-    public function types()
+    public function type()
     {
 
     return $this->belongsTo(Type::class,'type_id');

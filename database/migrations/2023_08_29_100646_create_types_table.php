@@ -3,6 +3,8 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use illuminate\Database\Seeder;
+use Illuminate\Support\Str;
 
 return new class extends Migration
 {
@@ -14,7 +16,7 @@ return new class extends Migration
         Schema::create('types', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('color', 20);
+            $table->string('color', 20)->nullable()->default('000');
             $table->timestamps();
         });
     }

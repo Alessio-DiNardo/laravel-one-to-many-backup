@@ -25,13 +25,14 @@ class Post extends Model
     public function type()
     {
 
-    return $this->belongsTo(Type::class)}
+    return $this->belongsTo(Type::class)
 
     /**
     * Get the route key for the model.
     */
+    
     public function getRouteKeyName(): string
     {
         return 'slug';
     }
-}
+}}
